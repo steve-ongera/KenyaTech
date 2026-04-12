@@ -100,8 +100,8 @@ class DepartmentSerializer(serializers.ModelSerializer):
 
 
 class JobListingSerializer(serializers.ModelSerializer):
-    department_name = serializers.CharField(source='department.name', read_only=True)
-    salary_range    = serializers.CharField(read_only=True)
+    department_name   = serializers.CharField(source='department.name', read_only=True)
+    salary_range      = serializers.CharField(read_only=True)
     job_type_display  = serializers.CharField(source='get_job_type_display', read_only=True)
     level_display     = serializers.CharField(source='get_level_display', read_only=True)
 
@@ -111,8 +111,8 @@ class JobListingSerializer(serializers.ModelSerializer):
 
 
 class JobListingDetailSerializer(serializers.ModelSerializer):
-    department      = DepartmentSerializer(read_only=True)
-    salary_range    = serializers.CharField(read_only=True)
+    department        = DepartmentSerializer(read_only=True)
+    salary_range      = serializers.CharField(read_only=True)
     job_type_display  = serializers.CharField(source='get_job_type_display', read_only=True)
     level_display     = serializers.CharField(source='get_level_display', read_only=True)
 
