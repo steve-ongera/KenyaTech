@@ -1,30 +1,35 @@
 // src/pages/AboutPage.jsx
+//
+// Requires Bootstrap Icons in your HTML head (or imported in your CSS):
+// <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+//
+
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getTeam, getSiteSettings } from '../services/api';
 import { Section, SectionHeader, PageHero, Spinner } from '../components/UI';
 
 const VALUES = [
-  { icon: '🔥', title: 'Craftsmanship',   desc: 'We obsess over details. Quality isnt a feature — its our default.' },
-  { icon: '🌍', title: 'African-First',    desc: 'We build for African users, African infrastructure, African reality.' },
-  { icon: '🤝', title: 'Partnerships',     desc: 'Were not a vendor — were a long-term partner in your digital journey.' },
-  { icon: '⚡', title: 'Velocity',          desc: 'Fast iteration without cutting corners. We ship, learn, and improve.' },
-  { icon: '🔒', title: 'Trust & Integrity', desc: 'Honest timelines, transparent pricing, no hidden surprises.' },
-  { icon: '📈', title: 'Impact-Driven',    desc: 'We measure success by your success — not just lines of code shipped.' },
+  { iconClass: 'bi bi-fire',            title: 'Craftsmanship',    desc: 'We obsess over details. Quality isnt a feature — its our default.' },
+  { iconClass: 'bi bi-globe-africa',    title: 'African-First',    desc: 'We build for African users, African infrastructure, African reality.' },
+  { iconClass: 'bi bi-handshake',       title: 'Partnerships',     desc: 'Were not a vendor — were a long-term partner in your digital journey.' },
+  { iconClass: 'bi bi-lightning-fill',  title: 'Velocity',         desc: 'Fast iteration without cutting corners. We ship, learn, and improve.' },
+  { iconClass: 'bi bi-shield-lock-fill',title: 'Trust & Integrity',desc: 'Honest timelines, transparent pricing, no hidden surprises.' },
+  { iconClass: 'bi bi-graph-up-arrow',  title: 'Impact-Driven',   desc: 'We measure success by your success — not just lines of code shipped.' },
 ];
 
 const MILESTONES = [
-  { year: '2018', title: 'Founded in Nairobi',        desc: 'Three engineers with a shared vision: world-class tech, made in Kenya.' },
-  { year: '2019', title: 'First Enterprise Client',   desc: 'Delivered a digital payments platform serving 50,000+ users.' },
-  { year: '2021', title: 'Team of 25',                desc: 'Grew to a full-service studio: engineering, design, and DevOps.' },
-  { year: '2022', title: 'East Africa Expansion',     desc: 'Opened satellite offices in Kampala and Dar es Salaam.' },
-  { year: '2023', title: '150 Projects Delivered',    desc: 'Crossed the 150-project milestone across 12 industries.' },
+  { year: '2018', title: 'Founded in Nairobi',          desc: 'Three engineers with a shared vision: world-class tech, made in Kenya.' },
+  { year: '2019', title: 'First Enterprise Client',     desc: 'Delivered a digital payments platform serving 50,000+ users.' },
+  { year: '2021', title: 'Team of 25',                  desc: 'Grew to a full-service studio: engineering, design, and DevOps.' },
+  { year: '2022', title: 'East Africa Expansion',       desc: 'Opened satellite offices in Kampala and Dar es Salaam.' },
+  { year: '2023', title: '150 Projects Delivered',      desc: 'Crossed the 150-project milestone across 12 industries.' },
   { year: '2024', title: 'AI & Data Practice Launched', desc: 'Dedicated team for machine learning and data engineering.' },
 ];
 
 export default function AboutPage() {
-  const [team, setTeam]         = useState([]);
-  const [loading, setLoading]   = useState(true);
+  const [team, setTeam]       = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getTeam('?ordering=order')
@@ -56,7 +61,9 @@ export default function AboutPage() {
               <p>
                 From ambitious startups to government agencies, we've helped over 80 clients transform their operations, reach more customers, and scale confidently in the digital age.
               </p>
-              <Link to="/contact" className="kt-btn">Start a Conversation →</Link>
+              <Link to="/contact" className="kt-btn">
+                Start a Conversation <i className="bi bi-arrow-right" />
+              </Link>
             </div>
             <div className="kt-about-split__visual">
               <div className="kt-about-stat-stack">
@@ -87,7 +94,7 @@ export default function AboutPage() {
           <div className="kt-values-grid">
             {VALUES.map(v => (
               <div key={v.title} className="kt-value-card">
-                <span className="kt-value-card__icon">{v.icon}</span>
+                <i className={`kt-value-card__icon ${v.iconClass}`} />
                 <h3 className="kt-value-card__title">{v.title}</h3>
                 <p className="kt-value-card__desc">{v.desc}</p>
               </div>
@@ -142,9 +149,21 @@ export default function AboutPage() {
                     <p className="kt-team-card__role">{m.role}</p>
                     <p className="kt-team-card__dept">{m.department}</p>
                     <div className="kt-team-card__socials">
-                      {m.linkedin && <a href={m.linkedin} target="_blank" rel="noreferrer">in</a>}
-                      {m.twitter  && <a href={m.twitter}  target="_blank" rel="noreferrer">𝕏</a>}
-                      {m.github   && <a href={m.github}   target="_blank" rel="noreferrer">gh</a>}
+                      {m.linkedin && (
+                        <a href={m.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn">
+                          <i className="bi bi-linkedin" />
+                        </a>
+                      )}
+                      {m.twitter && (
+                        <a href={m.twitter} target="_blank" rel="noreferrer" aria-label="Twitter / X">
+                          <i className="bi bi-twitter-x" />
+                        </a>
+                      )}
+                      {m.github && (
+                        <a href={m.github} target="_blank" rel="noreferrer" aria-label="GitHub">
+                          <i className="bi bi-github" />
+                        </a>
+                      )}
                     </div>
                   </div>
                 </div>
